@@ -61,4 +61,17 @@ class TransactionController extends Controller
             'List transaction successfully sent'
         );
     }
+
+    // testing untuk update transaksi
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success(
+            $transaction,
+            'Successfully update transaction'
+        );
+    }
 }
