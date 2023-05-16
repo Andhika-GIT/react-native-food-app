@@ -27,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // transaksi
     Route::get('transaction', [TransactionController::class, 'all']);
     Route::post('transaction/{id}', [TransactionController::class, 'update']);
+
+    // checkout
+    Route::post('checkout', [TransactionController::class, 'checkout']);
 });
 
 // login dan register
