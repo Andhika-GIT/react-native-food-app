@@ -131,7 +131,7 @@ class UserController extends Controller
     // API agar frontend bisa mengambil data user yang sedang login
     public function fetch(Request $request)
     {
-        return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
+        return ResponseFormatter::success($request->user(), 'User data sucessfully has send sucessfully');
     }
 
     public function updatePhoto(Request $request)
