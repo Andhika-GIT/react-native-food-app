@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -131,5 +132,38 @@ class UserController extends Controller
     public function fetch(Request $request)
     {
         return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|max:2048'
+        ]);
+
+        // jika validasi gambar gagal
+        if ($validator->fails()) {
+            // kirimkan pesan error ke frontend
+            return ResponseFormatter::error(
+                ['error' => $validator->errors()],
+                'Update photo fails',
+                401
+            );
+        }
+
+        // jika validasi berhasil
+        if ($request->file('file')) {
+            // masukkan nama gambar ke storage
+            $file = $request->file->store('assets/user', 'public');
+
+            // ambil data user yang sedang login
+            $user = Auth::user();
+
+            // supdate gambar user yang sedang login, simpan ke database
+            $user->profile_photo_path = $file;
+            $user->update();
+
+            // kirimkan pesan success ke frontend
+            return ResponseFormatter::success([$file], 'File successfully updated');
+        }
     }
 }
