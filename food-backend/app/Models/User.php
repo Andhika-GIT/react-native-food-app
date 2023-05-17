@@ -32,7 +32,7 @@ class User extends Authenticatable
         'houseNumber',
         'phoneNumber',
         'city',
-        'roles'
+        'roles',
     ];
 
     /**

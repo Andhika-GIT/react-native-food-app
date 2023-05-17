@@ -77,12 +77,11 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'password' => Hash::make($request->password),
                 'address' => $request->address,
                 'houseNumber' => $request->houseNumber,
                 'phoneNumber' => $request->phoneNumber,
                 'city' => $request->city,
-                'name' => $request->name,
-                'password' => Hash::make($request->password),
             ]);
 
             $user = User::where('email', $request->email)->first();
@@ -93,9 +92,9 @@ class UserController extends Controller
             // kirim response berhasil ke frontend
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
-                'token_type' => "Bearer",
+                'token_type' => 'Bearer',
                 'user' => $user
-            ]);
+            ], 'User Registered');
         }
 
 
