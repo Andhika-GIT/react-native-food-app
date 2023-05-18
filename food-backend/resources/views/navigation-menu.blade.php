@@ -22,6 +22,18 @@
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="/dashboard/transactions" :active="request()->routeIs('dashboard/transactions')">
+                        {{ __('Transactions') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="/dashboard/food" :active="request()->routeIs('dashboard/food')">
+                        {{ __('Food') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
