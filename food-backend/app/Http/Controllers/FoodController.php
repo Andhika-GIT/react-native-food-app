@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddFoodRequest;
+use App\Http\Requests\FoodRequest;
+use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
-use Illuminate\Http\Request;
+
 
 class FoodController extends Controller
 {
@@ -28,7 +31,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        return view('food.create');
     }
 
     /**
@@ -37,9 +40,15 @@ class FoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddFoodRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+
+        Food::create($data);
+
+        return redirect()->route('food.index');
     }
 
     /**
@@ -61,7 +70,10 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        //
+
+        return view('food.edit', [
+            'item' => $food
+        ]);
     }
 
     /**
@@ -71,9 +83,23 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(UpdateFoodRequest $request, Food $food)
     {
-        //
+
+
+        $data = $request->all();
+
+        if ($request->file('picturePath')) {
+
+            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        } else {
+
+            $data['picturePath'] = $food->picturePath;
+        }
+
+        $food->update($data);
+
+        return redirect()->route('food.index');
     }
 
     /**
@@ -84,6 +110,8 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        //
+        $food->delete();
+
+        return redirect()->route('food.index');
     }
 }
