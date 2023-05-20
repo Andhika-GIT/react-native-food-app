@@ -30,6 +30,10 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', userController::class);
         Route::resource('food', FoodController::class);
+
+        // transaksi
+        Route::get('transactions/{id}/status/{status}', [TransactionController::class, 'changeStatus'])
+            ->name('transactions.changeStatus');
         Route::resource('transactions', TransactionController::class);
     });
 
