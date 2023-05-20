@@ -6,10 +6,8 @@ import { SplashScreen } from './pages';
 
 export default function HomeScreen() {
   return (
-    <View>
+    <>
       <SplashScreen />
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({});
