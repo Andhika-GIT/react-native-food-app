@@ -82,7 +82,7 @@ class TransactionController extends Controller
     {
 
         // validasi data
-        $validatedData =  $request->validate([
+        $request->validate([
             'food_id' => 'required|exists:food,id',
             'user_id' => 'required|exists:users,id',
             'quantity' => 'required',
@@ -117,7 +117,9 @@ class TransactionController extends Controller
                 'order_id' => $transaction->id,
                 'gross_amount' => (int) $transaction->total,
 
-            ],
+            ],arrow_back
+            Dashboard
+            
             'costumer_details' => [
                 'first_name' => $transaction->user->name,
                 'email' => $transaction->user->email
