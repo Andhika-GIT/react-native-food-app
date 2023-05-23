@@ -1,36 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useEffect } from 'react';
 
 // icons or logo
 import { Logo } from '../../assets';
 
-// for fonts
-import { useFonts } from 'expo-font';
-import * as SplashScreens from 'expo-splash-screen';
-
-SplashScreens.preventAutoHideAsync();
-
-const SplashScreen = () => {
-  // import fonts
-  const [isLoaded] = useFonts({
-    'poppins-light': require('../../../assets/fonts/Poppins-Light.ttf'),
-    'poppins-medium': require('../../../assets/fonts/Poppins-Medium.ttf'),
-    'poppins-reguler': require('../../../assets/fonts/Poppins-Regular.ttf'),
-  });
-
-  // hide SplashScreens
-  const handleOnLayout = useCallback(async () => {
-    if (isLoaded) {
-      await SplashScreens.hideAsync(); //hide the SplashScreens
-    }
-  }, [isLoaded]);
-
-  if (!isLoaded) {
-    return null;
-  }
+const SplashScreen = ({ navigation }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('SignIn');
+    }, 2000);
+  }, []);
 
   return (
-    <View style={styles.Background} onLayout={handleOnLayout}>
+    <View style={styles.Background}>
       <Logo />
       <Text style={styles.Text}>FoodMarket</Text>
     </View>
