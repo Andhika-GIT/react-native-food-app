@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // import main app
 
-import { SignIn, SignUp, SplashScreen } from '../pages';
+import { SignIn, SignUp, SignUpAdress, SplashScreen, SuccessSignUp } from '../pages';
 
 // for fonts
 const Stack = createNativeStackNavigator();
@@ -22,6 +22,8 @@ function Router() {
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="SignUpAdress" component={SignUpAdress} />
+      <Stack.Screen name="SuccessSignUp" component={SuccessSignUp} />
     </Stack.Navigator>
   );
 }
