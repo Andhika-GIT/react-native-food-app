@@ -6,6 +6,7 @@ import { SignIn, SignUp, SignUpAdress, SplashScreen, SuccessSignUp, Home, Order,
 
 // bottom navigator
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigator } from '../components';
 
 // for fonts
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ const MainApp = () => {
       screenOptions={{
         headerShown: false,
       }}
+      tabBar={(props) => <BottomNavigator {...props} />}
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Order" component={Order} />
