@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontFamily: 'poppins-regular',
+    fontFamily: 'poppins-reguler',
     color: '#020202',
   },
   ratingContainer: {
