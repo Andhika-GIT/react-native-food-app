@@ -4,5 +4,6 @@ import FoodCard from './FoodCard';
 import HomeTabSection from './HomeTabSection/Index';
 import HomeProfile from './HomeProfile';
 import Rating from './Rating';
+import Counter from './Counter';
 
-export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating };
+export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating, Counter };

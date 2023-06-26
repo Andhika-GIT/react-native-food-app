@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, useWindowDimensions, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 
+// react-native
+import { useNavigation } from '@react-navigation/native';
+
 // dummy
 import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../../../assets';
 
@@ -15,46 +18,49 @@ const renderTabBar = (props) => (
   <TabBar
     {...props}
     indicatorStyle={{ backgroundColor: '#020202', height: 3, width: '0.1%' }}
-    style={{ backgroundColor: 'white' }}
+    style={{ backgroundColor: 'white', elevation: 0, shadowOpacity: 0, borderBottomColor: '#F2F2F2', borderBottomWidth: 1 }}
     tabStyle={{ width: 'auto' }}
     renderLabel={({ route, focused, color }) => <Text style={{ fontFamily: 'poppins-medium', color: focused ? '#020202' : '#8D92A3' }}>{route.title}</Text>}
   />
 );
 
 const NewTaste = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{ paddingTop: 8 }}>
-        <ItemListFood image={FoodDummy1} />
-        <ItemListFood image={FoodDummy2} />
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy4} />
+        <ItemListFood image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
       </View>
     </ScrollView>
   );
 };
 
 const Popular = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{ paddingTop: 8 }}>
-        <ItemListFood image={FoodDummy4} />
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy2} />
-        <ItemListFood image={FoodDummy1} />
+        <ItemListFood image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
       </View>
     </ScrollView>
   );
 };
 
 const Recommended = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{ paddingTop: 8 }}>
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy2} />
-        <ItemListFood image={FoodDummy1} />
-        <ItemListFood image={FoodDummy4} />
+        <ItemListFood image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
       </View>
     </ScrollView>
   );
@@ -76,7 +82,7 @@ const HomeTabSection = () => {
     { key: '3', title: 'Recommended' },
   ]);
 
-  return <TabView renderTabBar={renderTabBar} navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={{ width: layout.width }} />;
+  return <TabView renderTabBar={renderTabBar} navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={{ width: layout.width }} style={{ backgroundColor: 'white' }} />;
 };
 
 export default HomeTabSection;
