@@ -29,10 +29,10 @@ const InProgress = () => {
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" items={3} price="2.000.000" type="in-progress" image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy3} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy4} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" items={3} price="2.000.000" type="in-progress" image={FoodDummy2} onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy3} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy4} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />
       </View>
     </ScrollView>
   );
@@ -43,10 +43,10 @@ const PastOrders = () => {
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" status="Cancel" onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" status="Cancel" onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" onPress={() => navigation.navigate('FoodDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" status="Cancel" onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" status="Cancel" onPress={() => navigation.navigate('OrderDetail')} />
+        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" onPress={() => navigation.navigate('OrderDetail')} />
       </View>
     </ScrollView>
   );

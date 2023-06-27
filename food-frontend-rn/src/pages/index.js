@@ -11,5 +11,6 @@ import Profile from './Profile';
 import FoodDetail from './FoodDetail';
 import OrderSummary from './OrderSummary';
 import SuccessOrder from './SuccessOrder';
+import OrderDetail from './OrderDetail';
 
-export { SplashScreen, SignIn, SignUp, SignUpAdress, SuccessSignUp, Home, Order, Profile, FoodDetail, OrderSummary, SuccessOrder };
+export { SplashScreen, SignIn, SignUp, SignUpAdress, SuccessSignUp, Home, Order, Profile, FoodDetail, OrderSummary, SuccessOrder, OrderDetail };

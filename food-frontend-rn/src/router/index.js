@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // import pages
-import { SignIn, SignUp, SignUpAdress, SplashScreen, SuccessSignUp, Home, Order, Profile, FoodDetail, OrderSummary, SuccessOrder } from '../pages';
+import { SignIn, SignUp, SignUpAdress, SplashScreen, SuccessSignUp, Home, Order, Profile, FoodDetail, OrderSummary, SuccessOrder, OrderDetail } from '../pages';
 
 // bottom navigator
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -51,6 +51,7 @@ function Router() {
       <Stack.Screen name="FoodDetail" component={FoodDetail} />
       <Stack.Screen name="OrderSummary" component={OrderSummary} />
       <Stack.Screen name="SuccessOrder" component={SuccessOrder} />
+      <Stack.Screen name="OrderDetail" component={OrderDetail} />
     </Stack.Navigator>
   );
 }
