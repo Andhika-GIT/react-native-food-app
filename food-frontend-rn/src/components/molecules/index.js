@@ -8,5 +8,6 @@ import Counter from './Counter';
 import ItemListFood from './ItemListFood';
 import ItemValue from './ItemValue';
 import EmptyOrder from './EmptyOrder';
+import OrderTabSection from './OrderTabSection/Index';
 
-export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating, Counter, ItemListFood, ItemValue, EmptyOrder };
+export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating, Counter, ItemListFood, ItemValue, EmptyOrder, OrderTabSection };
