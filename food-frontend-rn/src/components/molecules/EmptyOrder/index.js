@@ -1,21 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-
-// assets
-import { IlSuccessSignUp } from '../../assets';
+import { IlEmptyOrder } from '../../../assets';
 
 // components
-import { Button, Gap } from '../../components';
+import { Button, Gap } from '../../atoms';
 
-const SuccessSignUp = ({ navigation }) => {
+// navigation
+import { useNavigation } from '@react-navigation/native';
+
+const EmptyOrder = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.page}>
-      <IlSuccessSignUp />
+      <IlEmptyOrder />
       <Gap height={30} />
-      <Text style={styles.title}>Yeay! Completed</Text>
+      <Text style={styles.title}>Ouch! Hungry</Text>
       <Gap height={6} />
-      <Text style={styles.subTitle}>Now you are able to order</Text>
-      <Text style={styles.subTitle}>some foods as a self-reward</Text>
+      <Text style={styles.subTitle}>Seems like you have not</Text>
+      <Text style={styles.subTitle}>ordered any food yet</Text>
       <Gap height={30} />
       <View style={styles.buttonContainer}>
         <Button text="Find Foods" onPress={() => navigation.replace('MainApp')} />
@@ -24,7 +26,7 @@ const SuccessSignUp = ({ navigation }) => {
   );
 };
 
-export default SuccessSignUp;
+export default EmptyOrder;
 
 const styles = StyleSheet.create({
   page: {
