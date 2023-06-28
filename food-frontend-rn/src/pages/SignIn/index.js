@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
+import axios from 'axios';
 
 //  components
 import { Header, TextInput, Button, Gap } from '../../components';
@@ -16,7 +17,14 @@ const SignIn = ({ navigation }) => {
   });
 
   const onSubmit = () => {
-    console.log(form);
+    axios
+      .post('http://192.168.1.8:8000/api/login', form)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <View style={styles.page}>
