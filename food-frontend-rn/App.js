@@ -10,6 +10,10 @@ import Router from './src/router';
 import { useFonts } from 'expo-font';
 import * as SplashScreens from 'expo-splash-screen';
 
+// redux
+import { Provider } from 'react-redux';
+import { store } from './src/store';
+
 function App() {
   // import fonts
   const [isLoaded] = useFonts({
@@ -30,9 +34,11 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Router />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
