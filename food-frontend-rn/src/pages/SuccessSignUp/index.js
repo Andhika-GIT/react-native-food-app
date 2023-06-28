@@ -7,7 +7,13 @@ import { IlSuccessSignUp } from '../../assets';
 // components
 import { Button, Gap } from '../../components';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+
 const SuccessSignUp = ({ navigation }) => {
+  const registerform = useSelector((state) => state.register);
+
+  console.log(registerform);
   return (
     <View style={styles.page}>
       <IlSuccessSignUp />
@@ -35,7 +41,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'poppins-reguler',
+    fontFamily: 'poppins-reguler',
     color: '#020202',
   },
   subTitle: {

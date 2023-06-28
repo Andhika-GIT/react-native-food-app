@@ -17,7 +17,7 @@ const registerSlice = createSlice({
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.passwordConfirmation = action.payload.passwordConfirmation;
+      state.passwordConfirmation = action.payload.passwordConfirmation ? action.payload.passwordConfirmation : action.payload.password;
     },
     setAddress(state, action) {
       state.address = action.payload.address;
