@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
 
+import axios from 'axios';
+
 // components
 import { Header, TextInput, Gap, Button, Select } from '../../components';
 
 // redux
-import { UseSelector, useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setError, setAddress } from '../../store';
 
 // custom hooks
 import { useForm } from '../../utils';
 
 const SignUpAdress = ({ navigation }) => {
-  const dispatch = useDispatch();
-
   const [form, setForm] = useForm({
     address: '',
     city: 'Bandung',
@@ -21,10 +21,27 @@ const SignUpAdress = ({ navigation }) => {
     phoneNumber: '',
   });
 
-  const onSubmit = () => {
-    dispatch(setAddress(form));
+  const registerData = useSelector((state) => state.register);
 
-    navigation.replace('SuccessSignUp');
+  const onSubmit = () => {
+    // dispatch(setAddress(form));
+
+    const data = {
+      ...form,
+      ...registerData,
+    };
+
+    axios
+      .post('http://192.168.1.8:8000/api/register', data)
+      .then((res) => {
+        console.log(res.data);
+        navigation.replace('SuccessSignUp');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // navigation.replace('SuccessSignUp');
   };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
