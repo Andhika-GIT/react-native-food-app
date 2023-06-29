@@ -4,6 +4,7 @@ const globalSlice = createSlice({
   name: 'global',
   initialState: {
     isError: false,
+    isLoading: false,
     message: 'Error',
   },
   reducers: {
@@ -11,9 +12,12 @@ const globalSlice = createSlice({
       state.isError = action.payload.isError;
       state.message = action.payload.message;
     },
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setError } = globalSlice.actions;
+export const { setError, setLoading } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

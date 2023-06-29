@@ -5,16 +5,18 @@ import axios from 'axios';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 
 // components
-import { Header, TextInput, Gap, Button, Select } from '../../components';
+import { Header, TextInput, Gap, Button, Select, Loading } from '../../components';
 
 // redux
-import { useSelector } from 'react-redux';
-import { setAddress } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoading } from '../../store';
 
 // custom hooks
 import { useForm } from '../../utils';
 
 const SignUpAdress = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const [form, setForm] = useForm({
     address: '',
     city: 'Bandung',
@@ -40,13 +42,17 @@ const SignUpAdress = ({ navigation }) => {
       ...registerData,
     };
 
+    dispatch(setLoading(true));
+
     axios
       .post('http://192.168.1.8:8000/api/register', data)
       .then((res) => {
+        dispatch(setLoading(false));
         showToast('Register success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch((err) => {
+        dispatch(setLoading(false));
         showToast(err?.response?.data?.data?.message);
       });
   };

@@ -11,5 +11,6 @@ import EmptyOrder from './EmptyOrder';
 import OrderTabSection from './OrderTabSection/Index';
 import ProfileTabSection from './ProfileTabSection/Index';
 import ItemListMenu from './ItemListMenu';
+import Loading from './Loading';
 
-export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating, Counter, ItemListFood, ItemValue, EmptyOrder, OrderTabSection, ProfileTabSection, ItemListMenu };
+export { Header, BottomNavigator, FoodCard, HomeTabSection, HomeProfile, Rating, Counter, ItemListFood, ItemValue, EmptyOrder, OrderTabSection, ProfileTabSection, ItemListMenu, Loading };

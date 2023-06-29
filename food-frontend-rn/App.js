@@ -3,6 +3,8 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import FlashMessage from 'react-native-flash-message';
 
+import { Loading } from './src/components';
+
 // import main router
 import Router from './src/router';
 
@@ -11,10 +13,23 @@ import { useFonts } from 'expo-font';
 import * as SplashScreens from 'expo-splash-screen';
 
 // redux
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from './src/store';
 
-function App() {
+const MainApp = () => {
+  // redux setup
+  const { isLoading } = useSelector((state) => state.global);
+
+  return (
+    <NavigationContainer>
+      <Router />
+      <FlashMessage position="top" style={{ paddingTop: 50 }} />
+      {isLoading && <Loading />}
+    </NavigationContainer>
+  );
+};
+
+const App = () => {
   // import fonts
   const [isLoaded] = useFonts({
     'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
@@ -35,12 +50,9 @@ function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Router />
-        <FlashMessage position="top" style={{ paddingTop: 50 }} />
-      </NavigationContainer>
+      <MainApp />
     </Provider>
   );
-}
+};
 
 export default App;

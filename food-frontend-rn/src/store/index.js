@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // slices
 import { registerReducer, setRegister, setAddress } from './slices/registerSlice';
-import { globalReducer, setError } from './slices/globalSlice';
+import { globalReducer, setError, setLoading } from './slices/globalSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,4 +11,4 @@ const store = configureStore({
   },
 });
 
-export { store, setRegister, setAddress, setError };
+export { store, setRegister, setAddress, setError, setLoading };
