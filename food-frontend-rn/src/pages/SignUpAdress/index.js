@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
-
 import axios from 'axios';
+
+import { showMessage, hideMessage } from 'react-native-flash-message';
 
 // components
 import { Header, TextInput, Gap, Button, Select } from '../../components';
 
 // redux
 import { useSelector } from 'react-redux';
-import { setError, setAddress } from '../../store';
+import { setAddress } from '../../store';
 
 // custom hooks
 import { useForm } from '../../utils';
@@ -23,6 +24,14 @@ const SignUpAdress = ({ navigation }) => {
 
   const registerData = useSelector((state) => state.register);
 
+  const showToast = (message, type) => {
+    showMessage({
+      message,
+      type: type === 'success' ? 'success' : 'danger',
+      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
+    });
+  };
+
   const onSubmit = () => {
     // dispatch(setAddress(form));
 
@@ -34,15 +43,14 @@ const SignUpAdress = ({ navigation }) => {
     axios
       .post('http://192.168.1.8:8000/api/register', data)
       .then((res) => {
-        console.log(res.data);
+        showToast('Register success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch((err) => {
-        console.log(err);
+        showToast(err?.response?.data?.data?.message);
       });
-
-    // navigation.replace('SuccessSignUp');
   };
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.page}>

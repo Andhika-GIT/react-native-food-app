@@ -1,7 +1,7 @@
+import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { useCallback } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FlashMessage from 'react-native-flash-message';
 
 // import main router
 import Router from './src/router';
@@ -37,6 +37,7 @@ function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Router />
+        <FlashMessage position="top" style={{ paddingTop: 50 }} />
       </NavigationContainer>
     </Provider>
   );
