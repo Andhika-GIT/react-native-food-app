@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
 import axios from 'axios';
 
-import { showMessage, hideMessage } from 'react-native-flash-message';
+// utils
+import { showMessage } from '../../utils';
 
 // components
 import { Header, TextInput, Gap, Button, Select, Loading } from '../../components';
