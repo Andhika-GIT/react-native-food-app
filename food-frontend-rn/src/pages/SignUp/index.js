@@ -12,7 +12,7 @@ import { Header, TextInput, Gap, Button } from '../../components';
 
 // redux
 import { UseSelector, useDispatch } from 'react-redux';
-import { setError, setRegister } from '../../store';
+import { setError, setRegister, setPhoto, setUploadStatus } from '../../store';
 
 // custom hooks
 import { useForm } from '../../utils';
@@ -26,7 +26,7 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
-  const [photo, setPhoto] = useState('');
+  const [image, setImage] = useState('');
 
   const onSubmit = () => {
     dispatch(setRegister(form));
@@ -47,15 +47,17 @@ const SignUp = ({ navigation }) => {
       showMessage('anda tidak memilih photo');
     } else {
       console.log(result);
-      const source = { uri: result.uri };
-      const fileName = result.uri.split('/').pop();
+      const source = { uri: result.assets[0].uri };
+      const fileName = result.assets[0].uri.split('/').pop();
       const dataImage = {
-        uri: result.uri,
-        type: result.type,
+        uri: result.assets[0].uri,
+        type: result.assets[0].type,
         name: fileName,
       };
 
-      setPhoto(source);
+      setImage(source);
+      dispatch(setPhoto(dataImage));
+      dispatch(setUploadStatus(true));
     }
   };
 
@@ -67,7 +69,7 @@ const SignUp = ({ navigation }) => {
           <View style={styles.photo}>
             <TouchableOpacity onPress={addPhoto}>
               <View style={styles.borderPhoto}>
-                {photo ? (
+                {image ? (
                   <Image style={styles.photoContainer} source={photo} />
                 ) : (
                   <View style={styles.photoContainer}>
