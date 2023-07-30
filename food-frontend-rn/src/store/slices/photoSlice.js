@@ -13,6 +13,7 @@ const photoSlice = createSlice({
       state.uri = action.payload.uri;
       state.type = action.payload.type;
       state.name = action.payload.name;
+      state.isUploadPhoto = true;
     },
     setUploadStatus(state, action) {
       state.isUploadPhoto = action.payload;

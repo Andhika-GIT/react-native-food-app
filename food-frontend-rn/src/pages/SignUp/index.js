@@ -49,15 +49,15 @@ const SignUp = ({ navigation }) => {
       console.log(result);
       const source = { uri: result.assets[0].uri };
       const fileName = result.assets[0].uri.split('/').pop();
+      const fileType = fileName.split('.').pop();
       const dataImage = {
         uri: result.assets[0].uri,
-        type: result.assets[0].type,
+        type: `image/${fileType}`,
         name: fileName,
       };
 
       setImage(source);
       dispatch(setPhoto(dataImage));
-      dispatch(setUploadStatus(true));
     }
   };
 
@@ -70,7 +70,7 @@ const SignUp = ({ navigation }) => {
             <TouchableOpacity onPress={addPhoto}>
               <View style={styles.borderPhoto}>
                 {image ? (
-                  <Image style={styles.photoContainer} source={photo} />
+                  <Image style={styles.photoContainer} source={image} />
                 ) : (
                   <View style={styles.photoContainer}>
                     <Text style={styles.addPhoto}>Add Photo</Text>

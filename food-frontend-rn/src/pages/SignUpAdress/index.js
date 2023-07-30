@@ -25,22 +25,15 @@ const SignUpAdress = ({ navigation }) => {
     phoneNumber: '',
   });
 
-  const registerData = useSelector((state) => state.register);
-
-  const showToast = (message, type) => {
-    showMessage({
-      message,
-      type: type === 'success' ? 'success' : 'danger',
-      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
-    });
-  };
+  const register = useSelector((state) => state.register);
+  const photo = useSelector((state) => state.photo);
 
   const onSubmit = () => {
     // dispatch(setAddress(form));
 
     const data = {
       ...form,
-      ...registerData,
+      ...register,
     };
 
     dispatch(setLoading(true));
@@ -48,13 +41,39 @@ const SignUpAdress = ({ navigation }) => {
     axios
       .post('http://192.168.1.8:8000/api/register', data)
       .then((res) => {
+        console.log(res.data.data);
+        console.log(photo.isUploadPhoto);
+        // create data form type to upload photo
+        const photoForUpload = new FormData();
+        photoForUpload.append('file', photo);
+
+        // call api to upload photo
+        if (photo.isUploadPhoto) {
+          axios
+            .post('http://192.168.1.8:8000/api/user/photo', photoForUpload, {
+              headers: {
+                Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+            .then((resUpload) => {
+              console.log(resUpload);
+            })
+            .catch((err) => {
+              console.log(err);
+              showMessage('upload photo failed');
+            });
+        }
+
+        // register success
         dispatch(setLoading(false));
-        showToast('Register success', 'success');
+        showMessage('Register success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch((err) => {
+        console.log(err);
         dispatch(setLoading(false));
-        showToast(err?.response?.data?.data?.message);
+        showMessage('something went wrong');
       });
   };
 
