@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { signUp } from '../thunks/SignUp';
+
 const globalSlice = createSlice({
   name: 'global',
   initialState: {
@@ -15,6 +17,17 @@ const globalSlice = createSlice({
     setLoading(state, action) {
       state.isLoading = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(signUp.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
 

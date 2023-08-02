@@ -1,43 +1,40 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React from "react";
-import axios from "axios";
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from 'react';
+import axios from 'axios';
 
 // utils
-import { showMessage } from "../../utils";
+import { showMessage } from '../../utils';
 
 // components
-import {
-  Header,
-  TextInput,
-  Gap,
-  Button,
-  Select,
-  Loading,
-} from "../../components";
+import { Header, TextInput, Gap, Button, Select, Loading } from '../../components';
 
 // redux
-import { useSelector, useDispatch } from "react-redux";
-import { setLoading, signUp } from "../../store";
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoading, signUp } from '../../store';
 
 // custom hooks
-import { useForm } from "../../utils";
+import { useForm } from '../../utils';
 
 // custom hooks
-import { useThunk } from "../../hooks/use-thunk";
+import { useThunk } from '../../hooks/use-thunk';
 
 const SignUpAdress = ({ navigation }) => {
-  const [doSignUpUser, isLoading, error] = useThunk(signUp);
+  const [doSignUpUser, error] = useThunk(signUp);
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    address: "",
-    city: "Bandung",
-    houseNumber: "",
-    phoneNumber: "",
+    address: '',
+    city: 'Bandung',
+    houseNumber: '',
+    phoneNumber: '',
   });
 
   const register = useSelector((state) => state.register);
   const photo = useSelector((state) => state.photo);
+
+  const registerUser = async (data) => {
+    await doSignUpUser(data);
+  };
 
   const onSubmit = () => {
     // dispatch(setAddress(form));
@@ -47,45 +44,28 @@ const SignUpAdress = ({ navigation }) => {
       ...register,
     };
 
-    dispatch(setLoading(true));
-    doSignUpUser(data, photo);
+    const signUpData = {
+      userData: data,
+      photoData: photo,
+    };
+
+    registerUser(signUpData).then(() => {
+      navigation.replace('SuccessSignUp');
+    });
   };
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.page}>
-        <Header
-          title="Address"
-          subTitle="Make sure it's valid"
-          onBack={() => {}}
-        />
+        <Header title="Address" subTitle="Make sure it's valid" onBack={() => {}} />
         <View style={styles.container}>
-          <TextInput
-            label="Phone No."
-            placeholder="Type your phone number"
-            value={form.phoneNumber}
-            onChangeText={(value) => setForm("phoneNumber", value)}
-          />
+          <TextInput label="Phone No." placeholder="Type your phone number" value={form.phoneNumber} onChangeText={(value) => setForm('phoneNumber', value)} />
           <Gap height={16} />
-          <TextInput
-            label="Address"
-            placeholder="Type your address"
-            value={form.address}
-            onChangeText={(value) => setForm("address", value)}
-          />
+          <TextInput label="Address" placeholder="Type your address" value={form.address} onChangeText={(value) => setForm('address', value)} />
           <Gap height={16} />
-          <TextInput
-            label="House No."
-            placeholder="Type your house number"
-            value={form.houseNumber}
-            onChangeText={(value) => setForm("houseNumber", value)}
-          />
+          <TextInput label="House No." placeholder="Type your house number" value={form.houseNumber} onChangeText={(value) => setForm('houseNumber', value)} />
           <Gap height={24} />
-          <Select
-            label="City"
-            value={form.city}
-            onSelectChange={(value) => setForm("city", value)}
-          />
+          <Select label="City" value={form.city} onSelectChange={(value) => setForm('city', value)} />
           <Gap height={16} />
           <Button text="Sign Up Now" onPress={onSubmit} />
         </View>
@@ -101,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     paddingHorizontal: 24,
     paddingVertical: 26,
     marginTop: 24,
