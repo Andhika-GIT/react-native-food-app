@@ -10,11 +10,12 @@ const API_HOST = {
 
 export const signUp = createAsyncThunk('users/signUp', async (data) => {
   const { userData, photoData } = data;
-  console.log(userData);
-  console.log(photoData);
+
   axios
     .post(`${API_HOST.url}/register`, userData)
     .then((res) => {
+      const profile = res.data.data.user;
+      console.log(profile);
       storeData('token', {
         value: `${res.data.data.token_type} ${res.data.data.access_token}`,
       });
@@ -33,10 +34,16 @@ export const signUp = createAsyncThunk('users/signUp', async (data) => {
               'Content-Type': 'multipart/form-data',
             },
           })
+          .then((responseUpload) => {
+            profile.profile_photo_url = photoData.uri;
+            storeData('userProfile', profile);
+          })
           .catch((err) => {
             console.log(err);
             showMessage('upload photo failed');
           });
+      } else {
+        storeData('userProfile', profile);
       }
     })
     .catch((err) => {
