@@ -1,9 +1,21 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useEffect, useState } from "react";
 
-import { ProfileDummy } from '../../../assets';
+// dummy
+import { ProfileDummy } from "../../../assets";
+
+// utils
+import { getData } from "../../../utils";
 
 const HomeProfile = () => {
+  const [photo, setPhoto] = useState(ProfileDummy);
+
+  useEffect(() => {
+    getData("userProfile").then((response) => {
+      setPhoto({ uri: response.profile_photo_url });
+    });
+  }, []);
+
   return (
     <View style={styles.profileContainer}>
       <View>
@@ -19,22 +31,22 @@ export default HomeProfile;
 
 const styles = StyleSheet.create({
   profileContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingTop: 50,
     paddingHorizontal: 24,
     paddingBottom: 24,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   appName: {
     fontSize: 22,
-    fontFamily: 'poppins-medium',
-    color: '#020202',
+    fontFamily: "poppins-medium",
+    color: "#020202",
   },
   desc: {
     fontSize: 14,
-    fontFamily: 'poppins-light',
-    color: '#8D92A3',
+    fontFamily: "poppins-light",
+    color: "#8D92A3",
   },
   profile: {
     width: 50,
