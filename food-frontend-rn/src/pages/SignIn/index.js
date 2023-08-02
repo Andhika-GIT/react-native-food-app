@@ -7,16 +7,30 @@ import { Header, TextInput, Button, Gap } from '../../components';
 
 // custom hooks
 import { useForm } from '../../utils';
+import { useThunk } from '../../hooks/use-thunk';
+
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+
+// redux store
+import { setLoading, signIn } from '../../store';
 
 const SignIn = ({ navigation }) => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [doSignInUser, isLoading, error] = useThunk(signIn);
+  const dispatch = useDispatch();
+
   const [form, setForm] = useForm({
     email: '',
     password: '',
   });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    dispatch(setLoading(true));
+
+    doSignInUser(form);
+
+    navigation.navigate('MainApp');
+  };
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Find your best ever meal" />

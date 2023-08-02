@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// ENV
+import { API_URL } from '@env';
+
 // utils
 import { storeData, showMessage } from '../../utils';
 
@@ -8,7 +11,7 @@ import { storeData, showMessage } from '../../utils';
 import { setLoading } from '../slices/globalSlice';
 
 const API_HOST = {
-  url: process.env.EXPO_PUBLIC_API_URL,
+  url: API_URL,
 };
 
 export const signUp = createAsyncThunk('users/signUp', async (data, { dispatch }) => {
