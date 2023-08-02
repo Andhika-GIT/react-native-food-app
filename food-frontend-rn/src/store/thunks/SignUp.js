@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// utils
+import { storeData, getData, showMessage } from "../../utils";
+
 const API_HOST = {
   url: "http://192.168.1.8:8000/api",
 };
@@ -11,21 +14,26 @@ export const signUp = createAsyncThunk(
     axios
       .post(`${API_HOST.url}/register`, userData)
       .then((res) => {
-        // create data form type to upload photo
-        const photoForUpload = new FormData();
-        photoForUpload.append("file", photoData);
+        // save token and user data to localstorage
+        storeData("userProfile", res.data.data.user);
 
-        // call api to upload photo
+        storeData("token", {
+          value: `${res.data.data.token_type} ${res.data.data.access_token}`,
+        });
+
+        // check if isUploadPhoto from photo slicer is true
         if (photoData.isUploadPhoto) {
+          // create data form type to upload photo
+          const photoForUpload = new FormData();
+          photoForUpload.append("file", photoData);
+
+          // call api to upload photo
           axios
             .post(`${API_HOST.url}/api/user/photo`, photoForUpload, {
               headers: {
                 Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
                 "Content-Type": "multipart/form-data",
               },
-            })
-            .then((resUpload) => {
-              console.log(resUpload);
             })
             .catch((err) => {
               console.log(err);
@@ -35,7 +43,6 @@ export const signUp = createAsyncThunk(
 
         // register success
         dispatch(setLoading(false));
-        showMessage("Register success", "success");
         navigation.replace("SuccessSignUp");
       })
       .catch((err) => {
