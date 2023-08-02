@@ -3,11 +3,19 @@ import React, { useEffect } from 'react';
 
 // icons or logo
 import { Logo } from '../../assets';
+import { getData } from '../../utils';
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('SignIn');
+      getData('token').then((res) => {
+        console.log(res);
+        if (res) {
+          navigation.reset({ index: 0, routes: [{ name: 'MainApp' }] });
+        } else {
+          navigation.replace('SignIn');
+        }
+      });
     }, 2000);
   }, []);
 

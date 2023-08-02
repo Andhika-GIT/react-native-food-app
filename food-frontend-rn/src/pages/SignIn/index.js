@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //  components
 import { Header, TextInput, Button, Gap } from '../../components';
 
 // custom hooks
-import { useForm } from '../../utils';
+import { getData, useForm } from '../../utils';
 import { useThunk } from '../../hooks/use-thunk';
 
 // redux

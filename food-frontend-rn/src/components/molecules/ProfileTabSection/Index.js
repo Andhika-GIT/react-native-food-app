@@ -14,6 +14,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Rating from '../Rating';
 import ItemListFood from '../ItemListFood';
 import ItemListMenu from '../ItemListMenu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -27,6 +28,10 @@ const renderTabBar = (props) => (
 
 const Account = () => {
   const navigation = useNavigation();
+  const signOut = () => {
+    // reset localStorage
+    AsyncStorage.multiRemove(['userProfile', 'token']).then(() => navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] }));
+  };
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
@@ -34,6 +39,7 @@ const Account = () => {
         <ItemListMenu text="Home Address" />
         <ItemListMenu text="Security" />
         <ItemListMenu text="Payments " />
+        <ItemListMenu text="SignOut" onPress={signOut} />
       </View>
     </ScrollView>
   );
