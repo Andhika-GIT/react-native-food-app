@@ -27,9 +27,9 @@ const SignIn = ({ navigation }) => {
   const onSubmit = () => {
     dispatch(setLoading(true));
 
-    doSignInUser(form);
+    doSignInUser({ form, navigation });
 
-    navigation.navigate('MainApp');
+    // navigation.navigate('MainApp');
   };
   return (
     <View style={styles.page}>

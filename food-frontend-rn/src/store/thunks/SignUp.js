@@ -14,9 +14,7 @@ const API_HOST = {
   url: API_URL,
 };
 
-export const signUp = createAsyncThunk('users/signUp', async (data, { dispatch }) => {
-  const { userData, photoData } = data;
-
+export const signUp = createAsyncThunk('users/signUp', async ({ userData, photoData, navigation }, { dispatch }) => {
   axios
     .post(`${API_HOST.url}/register`, userData)
     .then((res) => {
@@ -53,6 +51,7 @@ export const signUp = createAsyncThunk('users/signUp', async (data, { dispatch }
       }
 
       dispatch(setLoading(false));
+      navigation.replace('SuccessSignUp');
     })
     .catch((err) => {
       console.log(err);

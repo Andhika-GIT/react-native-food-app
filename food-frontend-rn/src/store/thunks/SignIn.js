@@ -14,7 +14,7 @@ const API_HOST = {
   url: API_URL,
 };
 
-export const signIn = createAsyncThunk('users/signIn', async (form, { dispatch }) => {
+export const signIn = createAsyncThunk('users/signIn', async ({ form, navigation }, { dispatch }) => {
   console.log(API_URL);
   axios
     .post(`${API_HOST.url}/login`, form)
@@ -29,6 +29,7 @@ export const signIn = createAsyncThunk('users/signIn', async (form, { dispatch }
       console.log(profile);
       storeData('userProfile', profile);
       dispatch(setLoading(false));
+      navigation.navigate('MainApp');
     })
     .catch((err) => {
       dispatch(setLoading(false));

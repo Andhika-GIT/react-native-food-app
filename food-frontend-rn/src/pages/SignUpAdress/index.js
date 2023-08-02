@@ -32,10 +32,6 @@ const SignUpAdress = ({ navigation }) => {
   const register = useSelector((state) => state.register);
   const photo = useSelector((state) => state.photo);
 
-  const registerUser = async (data) => {
-    await doSignUpUser(data);
-  };
-
   const onSubmit = () => {
     dispatch(setLoading(true));
 
@@ -47,11 +43,10 @@ const SignUpAdress = ({ navigation }) => {
     const signUpData = {
       userData: data,
       photoData: photo,
+      navigation,
     };
 
-    registerUser(signUpData).then(() => {
-      navigation.replace('SuccessSignUp');
-    });
+    doSignUpUser(signUpData);
   };
 
   return (
