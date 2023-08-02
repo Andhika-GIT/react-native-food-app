@@ -19,7 +19,7 @@ import { useForm } from '../../utils';
 import { useThunk } from '../../hooks/use-thunk';
 
 const SignUpAdress = ({ navigation }) => {
-  const [doSignUpUser, error] = useThunk(signUp);
+  const [doSignUpUser, isLoading, error] = useThunk(signUp);
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
@@ -37,7 +37,7 @@ const SignUpAdress = ({ navigation }) => {
   };
 
   const onSubmit = () => {
-    // dispatch(setAddress(form));
+    dispatch(setLoading(true));
 
     const data = {
       ...form,

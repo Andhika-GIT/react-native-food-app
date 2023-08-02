@@ -4,11 +4,14 @@ import axios from 'axios';
 // utils
 import { storeData, showMessage } from '../../utils';
 
+// actions reducers
+import { setLoading } from '../slices/globalSlice';
+
 const API_HOST = {
-  url: 'http://192.168.1.8:8000/api',
+  url: process.env.EXPO_PUBLIC_API_URL,
 };
 
-export const signUp = createAsyncThunk('users/signUp', async (data) => {
+export const signUp = createAsyncThunk('users/signUp', async (data, { dispatch }) => {
   const { userData, photoData } = data;
 
   axios
@@ -45,9 +48,12 @@ export const signUp = createAsyncThunk('users/signUp', async (data) => {
       } else {
         storeData('userProfile', profile);
       }
+
+      dispatch(setLoading(false));
     })
     .catch((err) => {
       console.log(err);
+      dispatch(setLoading(false));
       showMessage('something went wrong');
     });
 });

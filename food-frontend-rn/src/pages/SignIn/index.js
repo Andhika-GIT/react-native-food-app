@@ -16,16 +16,7 @@ const SignIn = ({ navigation }) => {
     password: '',
   });
 
-  const onSubmit = () => {
-    axios
-      .post('http://192.168.1.8:8000/api/login', form)
-      .then((res) => {
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+  const onSubmit = () => {};
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Find your best ever meal" />
