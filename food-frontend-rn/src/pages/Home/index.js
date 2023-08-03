@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../../assets';
@@ -6,7 +6,22 @@ import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../../assets';
 // components
 import { FoodCard, Gap, HomeProfile, HomeTabSection } from '../../components';
 
+// hooks
+import { useThunk } from '../../hooks/use-thunk.js';
+
+// redux
+import { getFood } from '../../store/thunks/Home';
+import { useSelector } from 'react-redux';
+
 const Home = () => {
+  const [doGetFood, isLoading, error] = useThunk(getFood);
+  const { food } = useSelector((state) => state.home);
+
+  useEffect(() => {
+    doGetFood();
+    console.log(food);
+  }, [doGetFood]);
+
   return (
     <View style={styles.page}>
       <HomeProfile />
@@ -14,10 +29,9 @@ const Home = () => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.foodCardContainer}>
             <Gap width={24} />
-            <FoodCard image={FoodDummy1} />
-            <FoodCard image={FoodDummy2} />
-            <FoodCard image={FoodDummy3} />
-            <FoodCard image={FoodDummy4} />
+            {food.map((itemFood, index) => {
+              return <FoodCard image={FoodDummy1} />;
+            })}
           </View>
         </ScrollView>
       </View>

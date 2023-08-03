@@ -12,8 +12,6 @@ const HomeProfile = () => {
 
   useEffect(() => {
     getData('userProfile').then((response) => {
-      console.log(response);
-
       // profile picture from server is not working for now, so we'll use dummy
       // setPhoto(response.profile_photo_url ? { uri: response.profile_photo_url } : ProfileDummy);
     });

@@ -15,7 +15,6 @@ const API_HOST = {
 };
 
 export const signIn = createAsyncThunk('users/signIn', async ({ form, navigation }, { dispatch }) => {
-  console.log(API_URL);
   axios
     .post(`${API_HOST.url}/login`, form)
     .then((res) => {
@@ -26,7 +25,6 @@ export const signIn = createAsyncThunk('users/signIn', async ({ form, navigation
 
       // store profile into localstorge
       const profile = res.data.data.user;
-      console.log(profile);
       storeData('userProfile', profile);
       dispatch(setLoading(false));
       navigation.navigate('MainApp');
