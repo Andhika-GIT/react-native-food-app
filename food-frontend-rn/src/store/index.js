@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { registerReducer, setRegister, setAddress } from './slices/registerSlice';
 import { globalReducer, setError, setLoading } from './slices/globalSlice';
 import { photoReducer, setPhoto, setUploadStatus } from './slices/photoSlice';
-import { homeReducer, setFood } from './slices/homeSlice';
+import { homeReducer, setFood, setNewTaste, setPopular, setRecommended } from './slices/homeSlice';
 
 const store = configureStore({
   reducer: {

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, useWindowDimensions, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // react-native
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +14,13 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Rating from '../Rating';
 import ItemListFood from '../ItemListFood';
 
+// redux
+import { useSelector } from 'react-redux';
+import { getFoodDataByTypes } from '../../../store';
+
+// custon hooks
+import { useThunk } from '../../../hooks/use-thunk';
+
 const renderTabBar = (props) => (
   <TabBar
     {...props}
@@ -26,13 +33,18 @@ const renderTabBar = (props) => (
 
 const NewTaste = () => {
   const navigation = useNavigation();
+  const { newTaste } = useSelector((state) => state.home);
+  const [getFoodTypes, isLoading, error] = useThunk(getFoodDataByTypes);
+
+  useEffect(() => {
+    getFoodTypes('new_food');
+  }, []);
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood type="product" name="sop bumil" price="380.000" rating={3} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood type="product" name="sop bumil" price="380.000" rating={3} image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood type="product" name="sop bumil" price="380.000" rating={3} image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood type="product" name="sop bumil" price="380.000" rating={3} image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
+        {newTaste.map((item) => {
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+        })}
       </View>
     </ScrollView>
   );

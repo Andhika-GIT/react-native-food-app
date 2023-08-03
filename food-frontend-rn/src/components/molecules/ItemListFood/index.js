@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import Rating from '../Rating';
 
+import Number from '../Number';
+
 const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, status }) => {
   const renderContent = () => {
     switch (type) {
@@ -12,9 +14,9 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>IDR {price}</Text>
+              <Number number={price} />
             </View>
-            <Rating rating={rating} />
+            <Rating number={rating} />
           </>
         );
 

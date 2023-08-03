@@ -4,22 +4,25 @@ const homeSlice = createSlice({
   name: 'home',
   initialState: {
     food: [],
+    newTaste: [],
+    popular: [],
+    recommended: [],
   },
   reducers: {
     setFood(state, action) {
       state.food = action.payload;
     },
+    setNewTaste(state, action) {
+      state.newTaste = action.payload;
+    },
+    setPopular(state, action) {
+      state.popular = action.payload;
+    },
+    setRecommended(state, action) {
+      state.recommended = action.payload;
+    },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(getFood.pending, (state, action) => {
-  //     // state.food = 'test';
-  //   });
-  //   builder.addCase(getFood.rejected, (state, action) => {});
-  //   builder.addCase(getFood.fulfilled, (state, { payload }) => {
-  //     state.food = payload;
-  //   });
-  // },
 });
 
 export const homeReducer = homeSlice.reducer;
-export const { setFood } = homeSlice.actions;
+export const { setFood, setNewTaste, setPopular, setRecommended } = homeSlice.actions;

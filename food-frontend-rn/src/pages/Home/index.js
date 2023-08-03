@@ -30,7 +30,7 @@ const Home = () => {
           <View style={styles.foodCardContainer}>
             <Gap width={24} />
             {food.map((itemFood, index) => {
-              return <FoodCard rating={itemFood.rate} name={itemFood.name} image={FoodDummy1} />;
+              return <FoodCard key={itemFood.id} rating={itemFood.rate} name={itemFood.name} image={FoodDummy1} />;
             })}
           </View>
         </ScrollView>
