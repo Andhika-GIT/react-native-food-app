@@ -19,7 +19,7 @@ const Rating = ({ number }) => {
   return (
     <View style={styles.ratingContainer}>
       <View style={styles.star}>{renderStar()}</View>
-      <Number number={number} type="decimal" />
+      <Number number={number} type="decimal" style={styles.numberRating} />
     </View>
   );
 };
@@ -34,5 +34,10 @@ const styles = StyleSheet.create({
   star: {
     flexDirection: 'row',
     marginRight: 4,
+  },
+  numberRating: {
+    fontSize: 12,
+    fontFamily: 'poppins-reguler',
+    color: '#8D92A3',
   },
 });

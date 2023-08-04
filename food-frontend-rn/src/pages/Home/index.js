@@ -13,7 +13,7 @@ import { useThunk } from '../../hooks/use-thunk.js';
 import { getFood } from '../../store/thunks/Home';
 import { useSelector } from 'react-redux';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [doGetFood, isLoading, error] = useThunk(getFood);
   const { food } = useSelector((state) => state.home);
 
@@ -30,7 +30,7 @@ const Home = () => {
           <View style={styles.foodCardContainer}>
             <Gap width={24} />
             {food.map((itemFood, index) => {
-              return <FoodCard key={itemFood.id} rating={itemFood.rate} name={itemFood.name} image={FoodDummy1} />;
+              return <FoodCard key={itemFood.id} rating={itemFood.rate} name={itemFood.name} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail', itemFood)} />;
             })}
           </View>
         </ScrollView>
