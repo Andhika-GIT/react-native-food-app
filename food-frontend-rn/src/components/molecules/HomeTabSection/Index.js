@@ -43,7 +43,7 @@ const NewTaste = () => {
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
         {newTaste.map((item) => {
-          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail', item)} />;
         })}
       </View>
     </ScrollView>
@@ -62,7 +62,7 @@ const Popular = () => {
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
         {popular.map((item) => {
-          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail', item)} />;
         })}
       </View>
     </ScrollView>
@@ -81,7 +81,7 @@ const Recommended = () => {
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
         {recommended.map((item) => {
-          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail', item)} />;
         })}
       </View>
     </ScrollView>

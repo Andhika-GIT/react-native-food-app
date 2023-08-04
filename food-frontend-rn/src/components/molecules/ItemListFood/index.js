@@ -14,7 +14,7 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Number number={price} />
+              <Number number={price} style={styles.price} />
             </View>
             <Rating number={rating} />
           </>
@@ -26,7 +26,7 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>IDR {price}</Text>
+              <Number number={price} style={styles.price} />
             </View>
             <Text style={styles.items}>{items} items</Text>
           </>
@@ -68,7 +68,7 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>IDR {price}</Text>
+              <Number number={price} style={styles.price} />
             </View>
             <Rating />
           </>

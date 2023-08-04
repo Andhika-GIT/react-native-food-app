@@ -9,9 +9,9 @@ const Rating = ({ number }) => {
     let star = [];
     for (let i = 1; i < 5; i++) {
       if (i <= number) {
-        star.push(<IcStarOn />);
+        star.push(<IcStarOn key={i} />);
       } else {
-        star.push(<IcStarOff />);
+        star.push(<IcStarOff key={i} />);
       }
     }
     return star;
@@ -29,7 +29,6 @@ export default Rating;
 const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   star: {
     flexDirection: 'row',
