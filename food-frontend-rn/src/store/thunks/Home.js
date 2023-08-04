@@ -26,7 +26,7 @@ export const getFoodDataByTypes = createAsyncThunk('home/getFoodTypes', async (t
     .get(`${API_URL}/food?types=${types}`)
     .then((response) => {
       //   console.log(response.data.data.data);
-      if (types === 'new_food') {
+      if (types === 'new_taste') {
         console.log(types);
         dispatch(setNewTaste(response.data.data.data));
       }

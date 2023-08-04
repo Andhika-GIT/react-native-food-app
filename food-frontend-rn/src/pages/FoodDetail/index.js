@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { FoodDummy6, IcBackWhite } from '../../assets';
 
@@ -17,36 +17,38 @@ const FoodDetail = ({ navigation, route }) => {
     setTotalItem(value);
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground source={FoodDummy6} style={styles.cover}>
-        <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
-          <IcBackWhite />
-        </TouchableOpacity>
-      </ImageBackground>
-      <View style={styles.content}>
-        <View style={styles.mainContent}>
-          <View style={styles.productContainer}>
-            <View>
-              <Text style={styles.title}>{name}</Text>
-              <Rating number={rate} />
+    <ScrollView>
+      <View style={styles.container}>
+        <ImageBackground source={FoodDummy6} style={styles.cover}>
+          <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
+            <IcBackWhite />
+          </TouchableOpacity>
+        </ImageBackground>
+        <View style={styles.content}>
+          <View style={styles.mainContent}>
+            <View style={styles.productContainer}>
+              <View>
+                <Text style={styles.title}>{name}</Text>
+                <Rating number={rate} />
+              </View>
+              <Counter onValueChange={onCounterChange} />
             </View>
-            <Counter onValueChange={onCounterChange} />
+            <Text style={styles.description}>{description}</Text>
+            <Text style={styles.label}>Ingredients:</Text>
+            <Text style={styles.description}>{ingredients}</Text>
           </View>
-          <Text style={styles.description}>{description}</Text>
-          <Text style={styles.label}>Ingredients:</Text>
-          <Text style={styles.description}>{ingredients}</Text>
-        </View>
-        <View style={styles.footer}>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceLabel}>Total Price</Text>
-            <Number number={totalItem * price} style={styles.priceTotal} />
-          </View>
-          <View style={styles.button}>
-            <Button text="Order now" onPress={() => navigation.navigate('OrderSummary')} />
+          <View style={styles.footer}>
+            <View style={styles.priceContainer}>
+              <Text style={styles.priceLabel}>Total Price</Text>
+              <Number number={totalItem * price} style={styles.priceTotal} />
+            </View>
+            <View style={styles.button}>
+              <Button text="Order now" onPress={() => navigation.navigate('OrderSummary')} />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'poppins-reguler',
     color: '#020202',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   footer: {
     flexDirection: 'row',

@@ -37,7 +37,7 @@ const NewTaste = () => {
   const [getFoodTypes, isLoading, error] = useThunk(getFoodDataByTypes);
 
   useEffect(() => {
-    getFoodTypes('new_food');
+    getFoodTypes('new_taste');
   }, []);
   return (
     <ScrollView>
