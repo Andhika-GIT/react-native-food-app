@@ -52,13 +52,18 @@ const NewTaste = () => {
 
 const Popular = () => {
   const navigation = useNavigation();
+  const { popular } = useSelector((state) => state.home);
+  const [getFoodTypes, isLoading, error] = useThunk(getFoodDataByTypes);
+
+  useEffect(() => {
+    getFoodTypes('popular');
+  }, []);
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood rating={3} image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
+        {popular.map((item) => {
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+        })}
       </View>
     </ScrollView>
   );
@@ -66,13 +71,18 @@ const Popular = () => {
 
 const Recommended = () => {
   const navigation = useNavigation();
+  const { recommended } = useSelector((state) => state.home);
+  const [getFoodTypes, isLoading, error] = useThunk(getFoodDataByTypes);
+
+  useEffect(() => {
+    getFoodTypes('recommended');
+  }, []);
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood rating={3} image={FoodDummy3} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy2} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />
-        <ItemListFood rating={3} image={FoodDummy4} onPress={() => navigation.navigate('FoodDetail')} />
+        {recommended.map((item) => {
+          return <ItemListFood key={item.id} type="product" name={item.name} price={item.price} rating={item.rate} image={FoodDummy1} onPress={() => navigation.navigate('FoodDetail')} />;
+        })}
       </View>
     </ScrollView>
   );
