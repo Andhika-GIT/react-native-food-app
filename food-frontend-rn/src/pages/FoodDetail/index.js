@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FoodDummy6, IcBackWhite } from '../../assets';
 
 // components
 import { Rating, Button, Counter, Number } from '../../components';
+
+// UTILS
+import { getData } from '../../utils';
 
 const FoodDetail = ({ navigation, route }) => {
   // mengambil data food dari parameter navigation
@@ -12,9 +15,45 @@ const FoodDetail = ({ navigation, route }) => {
   // untuk price
   const [totalItem, setTotalItem] = useState(1);
 
+  // untuk profile
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getData('userProfile').then((response) => {
+      setUserProfile(response);
+    });
+  }, []);
+
   // ketika counter berubah
   const onCounterChange = (value) => {
     setTotalItem(value);
+  };
+
+  // data yang dikirimkan ke halaman payment
+  const onOrder = () => {
+    const totalPrice = totalItem * price;
+    const driver = 50000;
+    const tax = (10 / 100) * totalPrice;
+    const total = totalPrice + driver + tax;
+
+    const data = {
+      item: {
+        name: name,
+        price: price,
+        picturePath: FoodDummy6,
+      },
+      transactions: {
+        totalItem: totalItem,
+        totalPrice: totalPrice,
+        driver: driver,
+        tax: tax,
+        total: total,
+      },
+      userProfile,
+    };
+
+    console.log(data);
+    navigation.navigate('OrderSummary', data);
   };
   return (
     <ScrollView>
@@ -43,7 +82,7 @@ const FoodDetail = ({ navigation, route }) => {
               <Number number={totalItem * price} style={styles.priceTotal} />
             </View>
             <View style={styles.button}>
-              <Button text="Order now" onPress={() => navigation.navigate('OrderSummary')} />
+              <Button text="Order now" onPress={onOrder} />
             </View>
           </View>
         </View>
