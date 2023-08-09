@@ -10,7 +10,7 @@ import { getData } from '../../utils';
 
 const FoodDetail = ({ navigation, route }) => {
   // mengambil data food dari parameter navigation
-  const { name, description, ingredients, rate, price } = route.params;
+  const { id, name, description, ingredients, rate, price } = route.params;
 
   // untuk price
   const [totalItem, setTotalItem] = useState(1);
@@ -38,6 +38,7 @@ const FoodDetail = ({ navigation, route }) => {
 
     const data = {
       item: {
+        id: id,
         name: name,
         price: price,
         picturePath: FoodDummy6,
@@ -52,7 +53,6 @@ const FoodDetail = ({ navigation, route }) => {
       userProfile,
     };
 
-    console.log(data);
     navigation.navigate('OrderSummary', data);
   };
   return (
