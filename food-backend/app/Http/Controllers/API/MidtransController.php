@@ -11,30 +11,27 @@ use Midtrans\Notification;
 class MidtransController extends Controller
 {
     // callback untuk update status notifikasi, apakah transaksi berhasil, cancel atau pending
-    public function callback(Request $reqeust)
+    public function callback(Request $request)
     {
-
-        // konfigurasi MidTrans
+        // Set konfigurasi midtrans
         Config::$serverKey = config('services.midtrans.serverKey');
         Config::$isProduction = config('services.midtrans.isProduction');
         Config::$isSanitized = config('services.midtrans.isSanitized');
         Config::$is3ds = config('services.midtrans.is3ds');
 
-
-        // buat instance midtrans notification
+        // Buat instance midtrans notification
         $notification = new Notification();
 
-
-        // assign ke variabel untuk memudahkan coding
+        // Assign ke variable untuk memudahkan coding
         $status = $notification->transaction_status;
         $type = $notification->payment_type;
         $fraud = $notification->fraud_status;
         $order_id = $notification->order_id;
 
-        // cari transaksi berdasarkan ID
+        // Cari transaksi berdasarkan ID
         $transaction = Transaction::findOrFail($order_id);
 
-        // handle notifikasi status midtrans
+        // Handle notification status midtrans
         if ($status == 'capture') {
             if ($type == 'credit_card') {
                 if ($fraud == 'challenge') {
@@ -55,8 +52,40 @@ class MidtransController extends Controller
             $transaction->status = 'CANCELLED';
         }
 
-        // simpan transaksi
+        // Simpan transaksi
         $transaction->save();
+
+        // Kirimkan email
+        if ($transaction) {
+            if ($status == 'capture' && $fraud == 'accept') {
+                //
+            } else if ($status == 'settlement') {
+                //
+            } else if ($status == 'success') {
+                //
+            } else if ($status == 'capture' && $fraud == 'challenge') {
+                return response()->json([
+                    'meta' => [
+                        'code' => 200,
+                        'message' => 'Midtrans Payment Challenge'
+                    ]
+                ]);
+            } else {
+                return response()->json([
+                    'meta' => [
+                        'code' => 200,
+                        'message' => 'Midtrans Payment not Settlement'
+                    ]
+                ]);
+            }
+
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Notification Success'
+                ]
+            ]);
+        }
     }
 
     // halaman ketika transaksi berhasil
