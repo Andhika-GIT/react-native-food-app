@@ -55,8 +55,12 @@ const OrderSummary = ({ navigation, route }) => {
   };
 
   const onNavChange = (state) => {
-    // const status = url.split('&').slice(1).shift().split('=').pop();
-    console.log(state);
+    const status = state.url?.split('&')?.slice(1)?.shift()?.split('=')?.pop();
+    console.log(status);
+    if (status) {
+      console.log('success');
+      navigation.replace('SuccessOrder');
+    }
   };
 
   if (isPaymentOpen) {
