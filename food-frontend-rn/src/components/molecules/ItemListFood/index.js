@@ -38,9 +38,11 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>
-                {items} items . IDR {price}
-              </Text>
+              <View style={styles.row}>
+                <Text style={styles.price}>{items} items</Text>
+                <View style={styles.dot} />
+                <Number number={price} style={styles.price} />
+              </View>
             </View>
           </>
         );
@@ -51,9 +53,11 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>
-                {items} items . IDR {price}
-              </Text>
+              <View style={styles.row}>
+                <Text style={styles.price}>{items} items</Text>
+                <View style={styles.dot} />
+                <Number number={price} style={styles.price} />
+              </View>
             </View>
             <View>
               <Text style={styles.date}>{date}</Text>
@@ -97,4 +101,6 @@ const styles = StyleSheet.create({
   items: { fontSize: 13, fontFamily: 'poppins-reguler', color: '#8D92A3' },
   date: { fontSize: 10, fontFamily: 'poppins-reguler', color: '#8D92A3' },
   status: { fontSize: 10, fontFamily: 'poppins-reguler', color: '#D9435E' },
+  row: { flexDirection: 'row', alignItems: 'center' },
+  dot: { width: 3, height: 3, borderRadius: 3, backgroundColor: '#8D92A3', marginHorizontal: 4 },
 });

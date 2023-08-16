@@ -1,14 +1,30 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // components
 import { EmptyOrder, Header, OrderTabSection } from '../../components';
 
+// utils
+import { useThunk } from '../../hooks/use-thunk';
+
+// thunk action
+import { getOrders } from '../../store';
+
+// redux
+import { useSelector } from 'react-redux';
+
 const Order = () => {
   const [isEmpty, setIsEmpty] = useState(false);
+  const [doGetOrders, isLoading, error] = useThunk(getOrders);
+  const { orders } = useSelector((state) => state.order);
+
+  useEffect(() => {
+    doGetOrders();
+  }, []);
+
   return (
     <View style={styles.page}>
-      {isEmpty ? (
+      {orders.length < 1 ? (
         <EmptyOrder />
       ) : (
         <View style={styles.container}>
