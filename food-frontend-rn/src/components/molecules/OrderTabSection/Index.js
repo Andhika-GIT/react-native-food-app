@@ -43,7 +43,7 @@ const InProgress = () => {
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
         {inProgress.map((order) => {
-          return <ItemListFood key={order.id} name={order.food.name} image={FoodDummy1} items={order.quantity} price={order.total} type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />;
+          return <ItemListFood key={order.id} name={order.food.name} image={FoodDummy1} items={order.quantity} price={order.total} type="in-progress" onPress={() => navigation.navigate('OrderDetail', order)} />;
         })}
       </View>
     </ScrollView>
@@ -71,7 +71,7 @@ const PastOrders = () => {
               type="past-orders"
               date={order.created_at}
               status={order.status}
-              onPress={() => navigation.navigate('OrderDetail')}
+              onPress={() => navigation.navigate('OrderDetail', order)}
             />
           );
         })}
