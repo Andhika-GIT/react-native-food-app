@@ -49,6 +49,7 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
 
       case 'past-orders':
         // item past orders
+        const formattedDate = new Date(date).toDateString();
         return (
           <>
             <View style={styles.content}>
@@ -60,8 +61,8 @@ const ItemListFood = ({ image, onPress, rating, items, price, type, name, date, 
               </View>
             </View>
             <View>
-              <Text style={styles.date}>{date}</Text>
-              <Text style={styles.status}>{status}</Text>
+              <Text style={styles.date}>{formattedDate}</Text>
+              <Text style={styles.status(status)}>{status}</Text>
             </View>
           </>
         );
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
   price: { fontFamily: 'poppins-reguler', fontSize: 13, color: '#8D92A3' },
   items: { fontSize: 13, fontFamily: 'poppins-reguler', color: '#8D92A3' },
   date: { fontSize: 10, fontFamily: 'poppins-reguler', color: '#8D92A3' },
-  status: { fontSize: 10, fontFamily: 'poppins-reguler', color: '#D9435E' },
+  status: (status) => ({ fontSize: 10, fontFamily: 'poppins-reguler', color: status === 'CANCELLED' ? '#D9435E' : '#1ABC9C' }),
   row: { flexDirection: 'row', alignItems: 'center' },
   dot: { width: 3, height: 3, borderRadius: 3, backgroundColor: '#8D92A3', marginHorizontal: 4 },
 });

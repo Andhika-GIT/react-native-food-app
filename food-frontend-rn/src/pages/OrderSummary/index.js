@@ -14,17 +14,8 @@ import { getData } from '../../utils';
 
 const OrderSummary = ({ navigation, route }) => {
   const { item, transactions, userProfile } = route.params;
-
-  const [token, setToken] = useState('');
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [paymentURL, setPaymentURL] = useState('https://www.google.com/');
-
-  useEffect(() => {
-    getData('token').then((res) => {
-      console.log(res.value);
-      setToken(res.value);
-    });
-  }, []);
 
   const onCheckOut = () => {
     const data = {
@@ -35,23 +26,23 @@ const OrderSummary = ({ navigation, route }) => {
       status: 'PENDING',
     };
 
-    console.log(data);
-
-    axios
-      .post(`${API_URL}/checkout`, data, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        // console.log(res.data);
-        setIsPaymentOpen(true);
-        setPaymentURL(res.data.data.payment_url);
-        // navigation.replace('SuccessOrder');
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    getData('token').then((resToken) => {
+      axios
+        .post(`${API_URL}/checkout`, data, {
+          headers: {
+            Authorization: resToken.value,
+          },
+        })
+        .then((res) => {
+          // console.log(res.data);
+          setIsPaymentOpen(true);
+          setPaymentURL(res.data.data.payment_url);
+          // navigation.replace('SuccessOrder');
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    });
   };
 
   const onNavChange = (state) => {
@@ -59,7 +50,7 @@ const OrderSummary = ({ navigation, route }) => {
     console.log(status);
     if (status) {
       console.log('success');
-      navigation.replace('SuccessOrder');
+      navigation.reset({ index: 0, routes: [{ name: 'SuccessOrder' }] });
     }
   };
 

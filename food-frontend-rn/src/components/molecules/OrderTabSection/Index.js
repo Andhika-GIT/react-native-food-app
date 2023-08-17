@@ -14,9 +14,13 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Rating from '../Rating';
 import ItemListFood from '../ItemListFood';
 
+// hooks
 import { useThunk } from '../../../hooks/use-thunk';
 
-import { getInProgress } from '../../../store';
+// thunk action
+import { getInProgress, getPastOrders } from '../../../store';
+
+import { useSelector } from 'react-redux';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -31,13 +35,16 @@ const renderTabBar = (props) => (
 const InProgress = () => {
   const navigation = useNavigation();
   const [doGetOrders, isLoading, error] = useThunk(getInProgress);
+  const { inProgress } = useSelector((state) => state.order);
   useEffect(() => {
     doGetOrders();
   }, []);
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />
+        {inProgress.map((order) => {
+          return <ItemListFood key={order.id} name={order.food.name} image={FoodDummy1} items={order.quantity} price={order.total} type="in-progress" onPress={() => navigation.navigate('OrderDetail')} />;
+        })}
       </View>
     </ScrollView>
   );
@@ -45,11 +52,29 @@ const InProgress = () => {
 
 const PastOrders = () => {
   const navigation = useNavigation();
+  const [doGetOrders, isLoading, error] = useThunk(getPastOrders);
+  const { pastOrders } = useSelector((state) => state.order);
+  useEffect(() => {
+    doGetOrders();
+  }, []);
   return (
     <ScrollView>
       <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" status="Cancel" onPress={() => navigation.navigate('OrderDetail')} />
-        <ItemListFood name="Soup Bumil" image={FoodDummy1} items={3} price="2.000.000" type="past-orders" date="Jun 12, 14:00" onPress={() => navigation.navigate('OrderDetail')} />
+        {pastOrders.map((order) => {
+          return (
+            <ItemListFood
+              key={order.id}
+              name={order.food.name}
+              image={FoodDummy1}
+              items={order.quantity}
+              price={order.total}
+              type="past-orders"
+              date={order.created_at}
+              status={order.status}
+              onPress={() => navigation.navigate('OrderDetail')}
+            />
+          );
+        })}
       </View>
     </ScrollView>
   );
