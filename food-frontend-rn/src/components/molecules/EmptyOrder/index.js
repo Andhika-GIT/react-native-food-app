@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'poppins-reguler',
+    fontFamily: 'poppins-reguler',
     color: '#020202',
   },
   subTitle: {
